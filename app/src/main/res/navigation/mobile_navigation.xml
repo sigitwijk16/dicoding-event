@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.gitz.dicodingevent.ui.home.HomeFragment"
+        android:label="Home" />
+
+    <fragment
+        android:id="@+id/navigation_active_events"
+        android:name="com.gitz.dicodingevent.ui.events.ActiveEventsFragment"
+        android:label="Active Events">
+        <action
+            android:id="@+id/action_active_to_detail"
+            app:destination="@id/navigation_event_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_inactive_events"
+        android:name="com.gitz.dicodingevent.ui.events.InactiveEventsFragment"
+        android:label="Past Events">
+        <action
+            android:id="@+id/action_inactive_to_detail"
+            app:destination="@id/navigation_event_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_event_detail"
+        android:name="com.gitz.dicodingevent.ui.events.EventDetailFragment"
+        android:label="Event Detail">
+        <argument
+            android:name="eventId"
+            app:argType="integer" />
+    </fragment>
+
+</navigation>
