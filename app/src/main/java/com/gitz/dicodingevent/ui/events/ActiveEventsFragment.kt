@@ -6,20 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import com.gitz.dicodingevent.R
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gitz.dicodingevent.R
 import com.gitz.dicodingevent.adapter.EventAdapter
 import com.gitz.dicodingevent.databinding.FragmentActiveEventsBinding
 import com.gitz.dicodingevent.utils.addBottomPaddingForLastItem
 import com.gitz.dicodingevent.viewmodel.EventsViewModel
-import com.google.android.material.search.SearchView
-import com.google.android.material.snackbar.Snackbar
 
 class ActiveEventsFragment : Fragment() {
 

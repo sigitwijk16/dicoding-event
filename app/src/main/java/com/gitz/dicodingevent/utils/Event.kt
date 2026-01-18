@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.gitz.dicodingevent.utils
 
 open class Event<out T>(private val content: T) {

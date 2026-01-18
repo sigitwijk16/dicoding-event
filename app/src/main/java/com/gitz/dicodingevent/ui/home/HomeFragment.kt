@@ -1,8 +1,7 @@
 package com.gitz.dicodingevent.ui.home
 
-import HorizontalSpaceItemDecoration
+import com.gitz.dicodingevent.utils.HorizontalSpaceItemDecoration
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,15 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.gitz.dicodingevent.R
 import com.gitz.dicodingevent.adapter.ActiveBannerAdapter
 import com.gitz.dicodingevent.adapter.EventAdapter
-import com.gitz.dicodingevent.databinding.FragmentActiveEventsBinding
 import com.gitz.dicodingevent.databinding.FragmentHomeBinding
-import com.gitz.dicodingevent.viewmodel.HomeViewModel
 import com.gitz.dicodingevent.utils.addBottomPaddingForLastItem
-import com.google.android.material.snackbar.Snackbar
+import com.gitz.dicodingevent.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
 
