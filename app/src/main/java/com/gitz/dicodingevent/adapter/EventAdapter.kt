@@ -18,6 +18,7 @@ class EventAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: EventItem) {
             binding.tvName.text = item.name
+            binding.tvOwnerName.text = item.ownerName
             Glide.with(binding.root)
                 .load(item.imageLogo.ifEmpty { item.mediaCover })
                 .into(binding.ivEvent)

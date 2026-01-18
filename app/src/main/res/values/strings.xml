@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DicodingEvent</string>
-    <string name="title_active_events">Active Events</string>
-    <string name="title_inactive_events">Inactive Events</string>
+    <string name="title_active_events">Upcoming</string>
+    <string name="title_inactive_events">Finished</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
