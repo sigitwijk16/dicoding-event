@@ -6,7 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,6 +21,7 @@ import com.gitz.dicodingevent.databinding.FragmentActiveEventsBinding
 import com.gitz.dicodingevent.databinding.FragmentHomeBinding
 import com.gitz.dicodingevent.viewmodel.HomeViewModel
 import com.gitz.dicodingevent.utils.addBottomPaddingForLastItem
+import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment : Fragment() {
 
@@ -60,7 +63,7 @@ class HomeFragment : Fragment() {
         binding.rvActive.addItemDecoration(
             HorizontalSpaceItemDecoration(
                 sidePadding = resources.getDimensionPixelSize(R.dimen.page_padding),
-                itemSpacing = resources.getDimensionPixelSize(R.dimen.item_spacing)
+                itemSpacing = resources.getDimensionPixelSize(R.dimen.item_spacing_home)
             )
         )
 
@@ -68,6 +71,13 @@ class HomeFragment : Fragment() {
             val bottomNavHeight = (activity?.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.nav_view)
                 ?.height ?: 0)
             binding.rvInactive.addBottomPaddingForLastItem(R.layout.item_event, bottomNavHeight)
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressActive.isVisible = isLoading
+            binding.progressInactive.isVisible = isLoading
+            binding.rvActive.isVisible = !isLoading
+            binding.rvInactive.isVisible = !isLoading
         }
 
         viewModel.activeEvents.observe(viewLifecycleOwner) {
@@ -78,6 +88,17 @@ class HomeFragment : Fragment() {
             inactiveAdapter.submitList(it)
         }
 
+        viewModel.error.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { errorMessage ->
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            }
+        }
+
         viewModel.loadHomeEvents()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

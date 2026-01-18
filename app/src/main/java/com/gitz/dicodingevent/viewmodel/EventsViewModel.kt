@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gitz.dicodingevent.data.response.EventItem
 import com.gitz.dicodingevent.data.retrofit.ApiConfig
+import com.gitz.dicodingevent.utils.Event
 import kotlinx.coroutines.launch
 
 class EventsViewModel : ViewModel() {
@@ -19,8 +20,8 @@ class EventsViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _error = MutableLiveData<String?>()
-    val error: LiveData<String?> = _error
+    private val _error = MutableLiveData<Event<String>>()
+    val error: LiveData<Event<String>> = _error
 
     fun loadEvents(active: Int) {
         if (_events.value != null) return
@@ -31,7 +32,7 @@ class EventsViewModel : ViewModel() {
                 val response = apiService.getEvents(active)
                 _events.value = response.listEvents
             } catch (e: Exception) {
-                _error.value = e.message
+                _error.value = Event(e.message ?: "Failed to load events")
             } finally {
                 _isLoading.value = false
             }
@@ -39,6 +40,8 @@ class EventsViewModel : ViewModel() {
     }
 
     fun searchEvents(keyword: String) {
+        if (_events.value != null) return
+
         viewModelScope.launch {
             _isLoading.value = true
             try {
@@ -47,6 +50,8 @@ class EventsViewModel : ViewModel() {
                     keyword = keyword
                 )
                 _events.value = response.listEvents
+            } catch (e: Exception) {
+                _error.value = Event(e.message ?: "Search failed")
             } finally {
                 _isLoading.value = false
             }

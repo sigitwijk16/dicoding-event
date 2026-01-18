@@ -7,12 +7,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.gitz.dicodingevent.R
 import com.gitz.dicodingevent.databinding.FragmentEventDetailBinding
 import com.gitz.dicodingevent.viewmodel.EventDetailViewModel
 import androidx.core.text.HtmlCompat
+import androidx.core.view.isVisible
+import com.google.android.material.snackbar.Snackbar
 
 class EventDetailFragment : Fragment() {
 
@@ -51,8 +54,14 @@ class EventDetailFragment : Fragment() {
             }
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBar.isVisible = isLoading
+        }
+
+        viewModel.error.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { errorMessage ->
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            }
         }
 
         viewModel.loadDetail(eventId)

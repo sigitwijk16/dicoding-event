@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gitz.dicodingevent.data.response.EventItem
 import com.gitz.dicodingevent.data.retrofit.ApiConfig
+import com.gitz.dicodingevent.utils.Event
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
@@ -22,10 +23,12 @@ class HomeViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _error = MutableLiveData<String?>()
-    val error: LiveData<String?> = _error
+    private val _error = MutableLiveData<Event<String>>()
+    val error: LiveData<Event<String>> = _error
 
     fun loadHomeEvents() {
+        if (_activeEvents.value != null && _inactiveEvents.value != null) return
+
         viewModelScope.launch {
             _isLoading.value = true
             try {
@@ -36,7 +39,7 @@ class HomeViewModel : ViewModel() {
                 _inactiveEvents.value = inactiveResponse.listEvents.take(5)
 
             } catch (e: Exception) {
-                _error.value = e.message
+                _error.value = Event(e.message ?: "Failed to load home events")
                 Log.e("HomeViewModel", "Failed to load home events", e)
             } finally {
                 _isLoading.value = false

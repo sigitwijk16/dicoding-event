@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import com.gitz.dicodingevent.R
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,6 +19,7 @@ import com.gitz.dicodingevent.databinding.FragmentActiveEventsBinding
 import com.gitz.dicodingevent.utils.addBottomPaddingForLastItem
 import com.gitz.dicodingevent.viewmodel.EventsViewModel
 import com.google.android.material.search.SearchView
+import com.google.android.material.snackbar.Snackbar
 
 class ActiveEventsFragment : Fragment() {
 
@@ -68,12 +70,14 @@ class ActiveEventsFragment : Fragment() {
             adapter.submitList(it)
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBar.isVisible = isLoading
         }
 
-        viewModel.error.observe(viewLifecycleOwner) {
-            it?.let { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
+        viewModel.error.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { errorMessage ->
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            }
         }
 
         viewModel.loadEvents(active = 1)
