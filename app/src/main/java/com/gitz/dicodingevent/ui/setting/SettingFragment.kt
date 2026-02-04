@@ -13,11 +13,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import com.gitz.dicodingevent.DailyEventWorker
-import com.gitz.dicodingevent.data.local.pref.SettingPreferences
-import com.gitz.dicodingevent.data.local.pref.dataStore
 import com.gitz.dicodingevent.databinding.FragmentSettingBinding
 import com.gitz.dicodingevent.di.Injection
 import com.gitz.dicodingevent.viewmodel.ViewModelFactory
@@ -69,10 +64,6 @@ class SettingFragment : Fragment() {
             }
         }
 
-        binding.btnTestNotification.setOnClickListener {
-            testNotification()
-        }
-
         binding.switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             viewModel.saveThemeSetting(isChecked)
         }
@@ -106,12 +97,6 @@ class SettingFragment : Fragment() {
         } else {
             viewModel.saveReminderSetting(true)
         }
-    }
-
-    private fun testNotification() {
-        val testWorkRequest = OneTimeWorkRequestBuilder<DailyEventWorker>().build()
-        WorkManager.getInstance(requireContext()).enqueue(testWorkRequest)
-        Toast.makeText(requireContext(), "Notification test triggered!", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
