@@ -13,5 +13,6 @@
         <item name="android:windowLightStatusBar">true</item>
 
         <item name="elevationOverlayEnabled">false</item>
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
     </style>
 </resources>

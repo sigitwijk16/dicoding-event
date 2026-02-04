@@ -2,6 +2,7 @@ package com.gitz.dicodingevent.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -44,6 +45,35 @@ class MainActivity : AppCompatActivity() {
         setupNavigation(navController)
 
         handleIntent(intent, navController)
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val navHostFragment = supportFragmentManager
+                    .findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+                val navController = navHostFragment.navController
+
+                if (navController.currentDestination?.id == R.id.navigation_active_events) {
+                    showExitDialog()
+                } else {
+                    if (!navController.navigateUp()) {
+                        showExitDialog()
+                    }
+                }
+            }
+        })
+    }
+
+    private fun showExitDialog() {
+        com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle("Exit App")
+            .setMessage("Are you sure you want to close the app?")
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton("Exit") { _, _ ->
+                finish()
+            }
+            .show()
     }
 
     private fun setupNavigation(navController: androidx.navigation.NavController) {

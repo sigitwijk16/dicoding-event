@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -50,6 +51,17 @@ class InactiveEventsFragment : Fragment() {
         setupSearchBar()
 
         observeEvents(0)
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding.searchView.isShowing) {
+                    binding.searchView.hide()
+                } else {
+                    isEnabled = false
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
+                }
+            }
+        })
     }
 
     private fun setupRecyclerView() {
@@ -73,8 +85,23 @@ class InactiveEventsFragment : Fragment() {
     }
 
     private fun setupSearchBar() {
+        val navView = activity?.findViewById<View>(R.id.nav_view)
+
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
+
+            searchView.addTransitionListener { _, _, newState ->
+                when (newState) {
+                    com.google.android.material.search.SearchView.TransitionState.SHOWING -> {
+                        navView?.visibility = View.GONE
+                    }
+                    com.google.android.material.search.SearchView.TransitionState.HIDING -> {
+                        navView?.visibility = View.VISIBLE
+                    }
+                    else -> {}
+                }
+            }
+
             searchView.editText.setOnEditorActionListener { _, _, _ ->
                 val query = searchView.text.toString()
                 searchBar.setText(query)

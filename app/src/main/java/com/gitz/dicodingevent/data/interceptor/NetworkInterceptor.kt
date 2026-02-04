@@ -12,17 +12,22 @@ class NetworkInterceptor(private val context: Context) : Interceptor {
         if (!isNetworkAvailable()) {
             throw IOException("Check your internet connection")
         }
-        return chain.proceed(chain.request())
+        return try {
+            chain.proceed(chain.request())
+        } catch (e: java.net.UnknownHostException) {
+            throw IOException("Check your internet connection")
+        } catch (e: java.net.SocketTimeoutException) {
+            throw IOException("Connection timed out")
+        }
     }
 
     private fun isNetworkAvailable(): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = connectivityManager.activeNetwork ?: return false
-        val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
-        return when {
-            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-            else -> false
-        }
+        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
+                (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
     }
 }
