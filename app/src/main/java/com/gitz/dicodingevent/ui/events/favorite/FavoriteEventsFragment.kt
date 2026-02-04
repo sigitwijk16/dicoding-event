@@ -73,7 +73,7 @@ class FavoriteEventsFragment : Fragment() {
 
     private fun observeFavorites() {
         viewModel.getFavoriteEvents().observe(viewLifecycleOwner) { favoriteList ->
-            binding.progressBar.isVisible = false
+            binding.progressBar.visibility = View.GONE
 
             val items = favoriteList.map { fav ->
                 EventItem(
@@ -96,7 +96,7 @@ class FavoriteEventsFragment : Fragment() {
 
             adapter.submitList(items)
 
-            binding.tvEmpty.isVisible = items.isEmpty()
+            binding.emptyState.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
         }
     }
 

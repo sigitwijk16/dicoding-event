@@ -14,4 +14,5 @@
     <style name="LeanSearchBar" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerSize">8dp</item>
     </style>
+
 </resources>
