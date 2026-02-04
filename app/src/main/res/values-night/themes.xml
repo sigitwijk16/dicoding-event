@@ -3,18 +3,15 @@
         <item name="colorPrimary">#FED03A</item>
         <item name="colorOnPrimary">#000000</item>
 
-        <item name="android:windowBackground">#0B0E11</item>
-        <item name="colorSurface">#0B0E11</item>
-        <item name="colorOnSurface">#F7F9F9</item>
+        <item name="android:windowBackground">#000000</item>
+        <item name="colorSurface">#000000</item>
+        <item name="colorOnSurface">#EFF3F4</item>
 
-        <item name="colorSurfaceVariant">#161B22</item>
-        <item name="colorOnSurfaceVariant">#8B98A5</item>
-        <item name="colorOutlineVariant">#21262D</item>
-
-        <item name="android:statusBarColor">#0B0E11</item>
+        <item name="colorSurfaceVariant">#16181C</item> <item name="colorOnSurfaceVariant">#71767B</item>
+        <item name="colorOutlineVariant">#2F3336</item> <item name="android:statusBarColor">#000000</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">#000000</item>
 
         <item name="elevationOverlayEnabled">false</item>
-        <item name="android:navigationBarColor">?attr/colorSurface</item>
     </style>
 </resources>
