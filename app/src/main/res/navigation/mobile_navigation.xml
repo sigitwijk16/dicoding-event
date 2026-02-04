@@ -2,16 +2,11 @@
 <navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@id/navigation_home">
-
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.gitz.dicodingevent.ui.home.HomeFragment"
-        android:label="Home" />
+    app:startDestination="@id/navigation_active_events">
 
     <fragment
         android:id="@+id/navigation_active_events"
-        android:name="com.gitz.dicodingevent.ui.events.ActiveEventsFragment"
+        android:name="com.gitz.dicodingevent.ui.events.active.ActiveEventsFragment"
         android:label="Active Events">
         <action
             android:id="@+id/action_active_to_detail"
@@ -20,7 +15,7 @@
 
     <fragment
         android:id="@+id/navigation_inactive_events"
-        android:name="com.gitz.dicodingevent.ui.events.InactiveEventsFragment"
+        android:name="com.gitz.dicodingevent.ui.events.inactive.InactiveEventsFragment"
         android:label="Past Events">
         <action
             android:id="@+id/action_inactive_to_detail"
@@ -29,11 +24,26 @@
 
     <fragment
         android:id="@+id/navigation_event_detail"
-        android:name="com.gitz.dicodingevent.ui.events.EventDetailFragment"
+        android:name="com.gitz.dicodingevent.ui.events.detail.EventDetailFragment"
         android:label="Event Detail">
         <argument
             android:name="eventId"
             app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_favorite_events"
+        android:name="com.gitz.dicodingevent.ui.events.favorite.FavoriteEventsFragment"
+        android:label="Favorite Events">
+        <action
+            android:id="@+id/action_favorite_to_detail"
+            app:destination="@id/navigation_event_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="com.gitz.dicodingevent.ui.setting.SettingFragment"
+        android:label="App Settings">
     </fragment>
 
 </navigation>

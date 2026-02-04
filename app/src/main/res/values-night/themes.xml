@@ -1,16 +1,19 @@
 <resources>
-    <!-- Base application theme. -->
     <style name="Theme.DicodingEvent" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#FED03A</item>
+        <item name="colorOnPrimary">#000000</item>
+
+        <item name="android:windowBackground">#0B0E11</item>
+        <item name="colorSurface">#0B0E11</item>
+        <item name="colorOnSurface">#F7F9F9</item>
+
+        <item name="colorSurfaceVariant">#161B22</item>
+        <item name="colorOnSurfaceVariant">#8B98A5</item>
+        <item name="colorOutlineVariant">#21262D</item>
+
+        <item name="android:statusBarColor">#0B0E11</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <item name="elevationOverlayEnabled">false</item>
     </style>
 </resources>

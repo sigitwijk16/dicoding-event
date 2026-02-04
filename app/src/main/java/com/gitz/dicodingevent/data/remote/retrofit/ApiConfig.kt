@@ -1,6 +1,8 @@
-package com.gitz.dicodingevent.data.retrofit
+package com.gitz.dicodingevent.data.remote.retrofit
 
+import android.content.Context
 import com.gitz.dicodingevent.BuildConfig
+import com.gitz.dicodingevent.data.interceptor.NetworkInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -8,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object{
-        fun getApiService(): ApiService {
+        fun getApiService(context: Context): ApiService {
             val loggingInterceptor = if(BuildConfig.DEBUG) {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             } else {
@@ -16,6 +18,7 @@ class ApiConfig {
             }
             val client = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
+                .addInterceptor(NetworkInterceptor(context))
                 .build()
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://event-api.dicoding.dev/")

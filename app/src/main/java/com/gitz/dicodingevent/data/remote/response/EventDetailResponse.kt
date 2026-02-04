@@ -1,4 +1,4 @@
-package com.gitz.dicodingevent.data.response
+package com.gitz.dicodingevent.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 

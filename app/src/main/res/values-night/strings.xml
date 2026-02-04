@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="favorite_button">Favorite button</string>
+    <string name="favorite">Favorite</string>
+    <string name="searchbar_hint_active">Search for upcoming events</string>
+    <string name="searchbar_hint_inactive">Search for finished events</string>
+</resources>

@@ -2,11 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
-
-    <item
         android:id="@+id/navigation_active_events"
         android:icon="@drawable/ic_calendar_month_24"
         android:title="@string/title_active_events" />
@@ -15,5 +10,15 @@
         android:id="@+id/navigation_inactive_events"
         android:icon="@drawable/ic_calendar_clock_24"
         android:title="@string/title_inactive_events" />
+
+    <item
+        android:id="@+id/navigation_favorite_events"
+        android:icon="@drawable/ic_bookmark"
+        android:title="@string/favorite" />
+
+    <item
+        android:id="@+id/navigation_setting"
+        android:icon="@drawable/ic_gear"
+        android:title="@string/setting" />
 
 </menu>

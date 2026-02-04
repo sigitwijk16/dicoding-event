@@ -9,13 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:hint="@string/searchbar_hint" />
+        app:backgroundTint="?attr/colorSurfaceVariant"
+        app:shapeAppearanceOverlay="@style/LeanSearchBar"
+        android:hint="@string/searchbar_hint_inactive" />
 
     <com.google.android.material.search.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/searchbar_hint"
+        android:hint="@string/searchbar_hint_inactive"
         app:layout_anchor="@id/searchBar" />
 
     <androidx.recyclerview.widget.RecyclerView
